@@ -4,7 +4,8 @@ def get_date_of_birth(id_number: str) -> str:
     STEP 2: Extract the date of birth from the ID number and return it as a string
     return format: DD/MM/YY:
     """
-    pass
+    id_num = list(id_number)
+    return f"{''.join(id_num[4:6])}/{''.join(id_num[2:4])}/{''.join(id_num[0:2])}"
 
 # Question 2
 def get_gender(id_number: str) -> str:
@@ -15,9 +16,13 @@ def get_gender(id_number: str) -> str:
     Formula: 1 if the ID number's 7th to 10th digit is less than 5000, the person is
     female and if it is greater than 4999, the person is male.
     """
-    pass
-
+    id_num = list(id_number)
+    if int("".join(id_num[6:10])) > 4999:
+        return "Male"
+    elif int("".join(id_num[6:10])) < 5000:
+        return "Female"
 # Question 3
+def fizzbuzz(number):
     """
     Fizzbuzz is a programme that prints the numbers from 1 to n, 
     but for multiples of 3, it prints "Fizz" instead of the number, 
@@ -26,15 +31,23 @@ def get_gender(id_number: str) -> str:
 
     TODO: define a function called fizzbuzz and implement the fucntionality above.
     """
-
-
+    for i in range(1 , number + 1):
+        if i % 5 == 0 and i % 3 ==0:
+            print("FizzBuzz")
+        elif i % 5 == 0:
+            print("Buzz")
+        elif i % 3 == 0:
+            print("Fizz")
+        else:
+            print(i)
 # Question 4
 def find_even_numbers(numbers):
     """Find the even numbers in the list 'numbers' and return them in
     in a tuple
 
     Hint: use modulus (%)"""
-    pass
+    even = [i for i in numbers if i % 2 == 0]
+    return tuple(even)
 
 # Question 5
 def find_odd_numbers(numbers):
@@ -42,7 +55,8 @@ def find_odd_numbers(numbers):
     in a tuple
 
     Hint: use modulus (%)"""
-    pass
+    odd= [i for i in numbers if i % 2 != 0]
+    return tuple(odd)
 
 # Question 6
 def return_list_stats(numbers):
@@ -62,7 +76,16 @@ def return_list_stats(numbers):
         number_of_odd_numbers : the total number of even numbers in the list
              'numbers'
     """
-    pass
+    dict_numbers = {}
+    dict_numbers['unique_numbers'] = set(numbers)
+    dict_numbers['max'] = max(numbers)
+    dict_numbers['min'] = min(numbers)
+    dict_numbers['average'] = sum(numbers) / len(numbers)
+    dict_numbers['even_numbers'] = find_even_numbers(numbers)
+    dict_numbers['odd_numbers'] = find_odd_numbers(numbers)
+    dict_numbers['number_of_even_numbers'] = len(find_even_numbers(numbers))
+    dict_numbers['number_of_odd_numbers'] = len(find_odd_numbers(numbers))  
+    return dict_numbers
 
 # Question 7
 def draw_triangle_reversed(height: int) -> None:
@@ -77,7 +100,8 @@ def draw_triangle_reversed(height: int) -> None:
         None: Prints the inverted triangle pattern directly to console.
 
     """
-    pass
+    for i in range(1 , height + 1):
+        print(" ".join([str(i)] * (height - (i - 1))) , "" , end = "\n")  # print the triangle with the specified height
 
 # Question 8
 def draw_triangle_prime(height: int) -> None:
@@ -92,8 +116,24 @@ def draw_triangle_prime(height: int) -> None:
         None: Prints the prime number triangle pattern directly to console.
 
     """
-    pass
+    for i in range(1 , height ):
+        row = []
+        num = 2
+        while len(row) < i + 1:
+            if is_prime(num):
+                row.append(num)
+                num += 1
+            else:
+                num += 1
+            print(" ".join(map(str, row)))  # print the triangle with the specified height
 
+def is_prime(x):
+    if x < 2:
+        return False
+    for i in range(2, int(x**0.5) + 1):
+        if x % i == 0:
+            return False
+        return True
 # Question 9
 def pascal_triangle(n):
     """
